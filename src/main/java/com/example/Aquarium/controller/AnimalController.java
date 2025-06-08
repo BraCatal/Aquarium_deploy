@@ -1,47 +1,32 @@
 package com.example.Aquarium.controller;
 
 import com.example.Aquarium.dto.AnimalDTO;
-import com.example.Aquarium.mapper.AnimalMapper;
-import com.example.Aquarium.model.Animal;
 import com.example.Aquarium.service.AnimalService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/animais")
+@RequestMapping("/animal")
 public class AnimalController {
 
-    private final AnimalService animalService;
-
-    public AnimalController(AnimalService animalService) {
-        this.animalService = animalService;
-    }
+    @Autowired
+    private AnimalService animalService;
 
     @GetMapping
-    public List<AnimalDTO> listarTodos() {
-        return animalService.listarTodos()
-                .stream()
-                .map(AnimalMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}")
-    public AnimalDTO buscarPorId(@PathVariable Long id) {
-        return AnimalMapper.toDTO(animalService.buscarPorId(id));
+    public List<AnimalDTO> listar() {
+        return animalService.listar();
     }
 
     @PostMapping
-    public AnimalDTO criar(@RequestBody Animal animal) {
-        Animal novoAnimal = animalService.salvar(animal);
-        return AnimalMapper.toDTO(novoAnimal);
+    public AnimalDTO criar(@RequestBody AnimalDTO animalDTO) {
+        return animalService.criar(animalDTO);
     }
 
     @PutMapping("/{id}")
-    public AnimalDTO atualizar(@PathVariable Long id, @RequestBody Animal animal) {
-        Animal atualizado = animalService.atualizar(id, animal);
-        return AnimalMapper.toDTO(atualizado);
+    public AnimalDTO atualizar(@PathVariable Long id, @RequestBody AnimalDTO animalDTO) {
+        return animalService.atualizar(id, animalDTO);
     }
 
     @DeleteMapping("/{id}")
