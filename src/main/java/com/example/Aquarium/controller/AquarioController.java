@@ -1,47 +1,32 @@
 package com.example.Aquarium.controller;
 
 import com.example.Aquarium.dto.AquarioDTO;
-import com.example.Aquarium.mapper.AquarioMapper;
-import com.example.Aquarium.model.Aquario;
 import com.example.Aquarium.service.AquarioService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/aquarios")
+@RequestMapping("/aquario")
 public class AquarioController {
 
-    private final AquarioService aquarioService;
-
-    public AquarioController(AquarioService aquarioService) {
-        this.aquarioService = aquarioService;
-    }
+    @Autowired
+    private AquarioService aquarioService;
 
     @GetMapping
-    public List<AquarioDTO> listarTodos() {
-        return aquarioService.listarTodos()
-                .stream()
-                .map(AquarioMapper::toDTO)
-                .collect(Collectors.toList());
-    }
-
-    @GetMapping("/{id}")
-    public AquarioDTO buscarPorId(@PathVariable Long id) {
-        return AquarioMapper.toDTO(aquarioService.buscarPorId(id));
+    public List<AquarioDTO> listar() {
+        return aquarioService.listar();
     }
 
     @PostMapping
-    public AquarioDTO criar(@RequestBody Aquario aquario) {
-        Aquario novoAquario = aquarioService.salvar(aquario);
-        return AquarioMapper.toDTO(novoAquario);
+    public AquarioDTO criar(@RequestBody AquarioDTO aquarioDTO) {
+        return aquarioService.criar(aquarioDTO);
     }
 
     @PutMapping("/{id}")
-    public AquarioDTO atualizar(@PathVariable Long id, @RequestBody Aquario aquario) {
-        Aquario atualizado = aquarioService.atualizar(id, aquario);
-        return AquarioMapper.toDTO(atualizado);
+    public AquarioDTO atualizar(@PathVariable Long id, @RequestBody AquarioDTO aquarioDTO) {
+        return aquarioService.atualizar(id, aquarioDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -49,5 +34,6 @@ public class AquarioController {
         aquarioService.deletar(id);
     }
 }
+
 
 
