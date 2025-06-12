@@ -3,6 +3,7 @@ package com.example.Aquarium.mapper;
 import com.example.Aquarium.dto.AquarioDTO;
 import com.example.Aquarium.dto.AnimalDTO;
 import com.example.Aquarium.model.Aquario;
+import com.example.Aquarium.model.Animal;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +17,28 @@ public class AquarioMapper {
         dto.setLocalizacao(aquario.getLocalizacao());
         dto.setCapacidade(aquario.getCapacidade());
 
-        // Converter a lista de Animais
-        List<AnimalDTO> animaisDTO = aquario.getAnimais()
-                .stream()
-                .map(AnimalMapper::toDTO)
-                .collect(Collectors.toList());
-        dto.setAnimais(animaisDTO);
+        // Converter lista de animais
+        if (aquario.getAnimais() != null) {
+            List<AnimalDTO> animaisDTO = aquario.getAnimais()
+                    .stream()
+                    .map(AnimalMapper::toDTO)
+                    .collect(Collectors.toList());
+            dto.setAnimais(animaisDTO);
+        }
 
         return dto;
     }
+
+    public static Aquario toEntity(AquarioDTO dto) {
+        Aquario aquario = new Aquario();
+        aquario.setId(dto.getId());
+        aquario.setNome(dto.getNome());
+        aquario.setLocalizacao(dto.getLocalizacao());
+        aquario.setCapacidade(dto.getCapacidade());
+
+        // Aqui não populamos os animais — geralmente isso é feito via Service
+        return aquario;
+    }
 }
+
 
