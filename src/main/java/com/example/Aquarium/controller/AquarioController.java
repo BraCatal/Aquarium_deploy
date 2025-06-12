@@ -1,8 +1,6 @@
 package com.example.Aquarium.controller;
 
 import com.example.Aquarium.dto.AquarioDTO;
-import com.example.Aquarium.service.AquarioService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,27 +9,23 @@ import java.util.List;
 @RequestMapping("/aquario")
 public class AquarioController {
 
-    @Autowired
-    private AquarioService aquarioService;
-
     @GetMapping
     public List<AquarioDTO> listar() {
-        return aquarioService.listar();
+        return null;
     }
 
     @PostMapping
     public AquarioDTO criar(@RequestBody AquarioDTO aquarioDTO) {
-        return aquarioService.criar(aquarioDTO);
+        return null;
     }
 
     @PutMapping("/{id}")
     public AquarioDTO atualizar(@PathVariable Long id, @RequestBody AquarioDTO aquarioDTO) {
-        return aquarioService.atualizar(id, aquarioDTO);
+        return null;
     }
 
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
-        aquarioService.deletar(id);
     }
 }
 
