@@ -1,10 +1,13 @@
 package com.example.Aquarium.service;
 
+import com.example.Aquarium.dto.AquarioDTO;
+import com.example.Aquarium.mapper.AquarioMapper;
 import com.example.Aquarium.model.Aquario;
 import com.example.Aquarium.repository.AquarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AquarioService {
@@ -15,27 +18,33 @@ public class AquarioService {
         this.aquarioRepository = aquarioRepository;
     }
 
-    public List<Aquario> listarTodos() {
-        return aquarioRepository.findAll();
+    public List<AquarioDTO> listar() {
+        return aquarioRepository.findAll()
+                .stream()
+                .map(AquarioMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public Aquario buscarPorId(Long id) {
-        return aquarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Aquário não encontrado"));
+    public AquarioDTO criar(AquarioDTO dto) {
+        Aquario aquario = AquarioMapper.toEntity(dto);
+        Aquario salvo = aquarioRepository.save(aquario);
+        return AquarioMapper.toDTO(salvo);
     }
 
-    public Aquario salvar(Aquario aquario) {
-        return aquarioRepository.save(aquario);
-    }
+    public AquarioDTO atualizar(Long id, AquarioDTO dto) {
+        Aquario aquario = aquarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Aquário não encontrado"));
 
-    public Aquario atualizar(Long id, Aquario aquarioAtualizado) {
-        Aquario aquario = buscarPorId(id);
-        aquario.setNome(aquarioAtualizado.getNome());
-        aquario.setLocalizacao(aquarioAtualizado.getLocalizacao());
-        aquario.setCapacidade(aquarioAtualizado.getCapacidade());
-        return aquarioRepository.save(aquario);
+        aquario.setNome(dto.getNome());
+        aquario.setLocalizacao(dto.getLocalizacao());
+        aquario.setCapacidade(dto.getCapacidade());
+
+        Aquario atualizado = aquarioRepository.save(aquario);
+        return AquarioMapper.toDTO(atualizado);
     }
 
     public void deletar(Long id) {
         aquarioRepository.deleteById(id);
     }
 }
+
