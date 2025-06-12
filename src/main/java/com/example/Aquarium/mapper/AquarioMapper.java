@@ -3,7 +3,6 @@ package com.example.Aquarium.mapper;
 import com.example.Aquarium.dto.AquarioDTO;
 import com.example.Aquarium.dto.AnimalDTO;
 import com.example.Aquarium.model.Aquario;
-import com.example.Aquarium.model.Animal;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,7 +16,7 @@ public class AquarioMapper {
         dto.setLocalizacao(aquario.getLocalizacao());
         dto.setCapacidade(aquario.getCapacidade());
 
-        // Converter lista de animais
+        // Preenche a lista de animais (se houver)
         if (aquario.getAnimais() != null) {
             List<AnimalDTO> animaisDTO = aquario.getAnimais()
                     .stream()
@@ -36,9 +35,10 @@ public class AquarioMapper {
         aquario.setLocalizacao(dto.getLocalizacao());
         aquario.setCapacidade(dto.getCapacidade());
 
-        // Aqui não populamos os animais — geralmente isso é feito via Service
+        // Não setamos a lista de animais aqui por segurança (evita inconsistência)
         return aquario;
     }
 }
+
 
 
