@@ -2,7 +2,6 @@ package com.example.Aquarium.mapper;
 
 import com.example.Aquarium.dto.AnimalDTO;
 import com.example.Aquarium.model.Animal;
-import com.example.Aquarium.model.Aquario;
 
 public class AnimalMapper {
 
@@ -12,6 +11,11 @@ public class AnimalMapper {
         dto.setNome(animal.getNome());
         dto.setEspecie(animal.getEspecie());
         dto.setIdade(animal.getIdade());
+
+        if (animal.getAquario() != null) {
+            dto.setAquarioId(animal.getAquario().getId());
+        }
+
         return dto;
     }
 
@@ -22,9 +26,11 @@ public class AnimalMapper {
         animal.setEspecie(dto.getEspecie());
         animal.setIdade(dto.getIdade());
 
-        // Obs: aqui não associamos aquário diretamente, isso pode ser feito no Service
+        // O campo aquario será setado no Service, se necessário
+
         return animal;
     }
 }
+
 
 
