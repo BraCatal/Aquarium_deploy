@@ -3,7 +3,9 @@ package com.example.Aquarium.service;
 import com.example.Aquarium.dto.AnimalDTO;
 import com.example.Aquarium.mapper.AnimalMapper;
 import com.example.Aquarium.model.Animal;
+import com.example.Aquarium.model.Aquario;
 import com.example.Aquarium.repository.AnimalRepository;
+import com.example.Aquarium.repository.AquarioRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +15,11 @@ import java.util.stream.Collectors;
 public class AnimalService {
 
     private final AnimalRepository animalRepository;
+    private final AquarioRepository aquarioRepository;
 
-    public AnimalService(AnimalRepository animalRepository) {
+    public AnimalService(AnimalRepository animalRepository, AquarioRepository aquarioRepository) {
         this.animalRepository = animalRepository;
+        this.aquarioRepository = aquarioRepository;
     }
 
     public List<AnimalDTO> listar() {
@@ -27,6 +31,13 @@ public class AnimalService {
 
     public AnimalDTO criar(AnimalDTO dto) {
         Animal animal = AnimalMapper.toEntity(dto);
+
+        if (dto.getAquarioId() != null) {
+            Aquario aquario = aquarioRepository.findById(dto.getAquarioId())
+                    .orElseThrow(() -> new RuntimeException("Aquário não encontrado"));
+            animal.setAquario(aquario);
+        }
+
         Animal salvo = animalRepository.save(animal);
         return AnimalMapper.toDTO(salvo);
     }
@@ -37,7 +48,13 @@ public class AnimalService {
 
         existente.setNome(dto.getNome());
         existente.setEspecie(dto.getEspecie());
-        // se tiver idade ou aquário no DTO, adicione também aqui
+        existente.setIdade(dto.getIdade());
+
+        if (dto.getAquarioId() != null) {
+            Aquario aquario = aquarioRepository.findById(dto.getAquarioId())
+                    .orElseThrow(() -> new RuntimeException("Aquário não encontrado"));
+            existente.setAquario(aquario);
+        }
 
         Animal atualizado = animalRepository.save(existente);
         return AnimalMapper.toDTO(atualizado);
@@ -47,4 +64,5 @@ public class AnimalService {
         animalRepository.deleteById(id);
     }
 }
+
 
