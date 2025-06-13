@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
         description = "API RESTful para gerenciamento de aquários e seus respectivos animais.",
         contact = @Contact(
             name = "Breno",
-            email = "breno@email.com"
+            email = "breno.baroncelli@soulasalle.com.br"
         ),
         license = @License(name = "MIT License")
     ),
