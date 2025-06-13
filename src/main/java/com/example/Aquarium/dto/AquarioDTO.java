@@ -3,11 +3,23 @@ package com.example.Aquarium.dto;
 import java.util.List;
 
 public class AquarioDTO {
+
     private Long id;
     private String nome;
     private String localizacao;
-    private Integer capacidade;
-    private List<AnimalDTO> animais; // Lista de animais que pertencem a esse aquário
+    private int capacidade;
+    private List<AnimalDTO> animais; // Certifique-se de que AnimalDTO esteja importado corretamente
+
+    public AquarioDTO() {
+    }
+
+    public AquarioDTO(Long id, String nome, String localizacao, int capacidade, List<AnimalDTO> animais) {
+        this.id = id;
+        this.nome = nome;
+        this.localizacao = localizacao;
+        this.capacidade = capacidade;
+        this.animais = animais;
+    }
 
     public Long getId() {
         return id;
@@ -33,11 +45,11 @@ public class AquarioDTO {
         this.localizacao = localizacao;
     }
 
-    public Integer getCapacidade() {
+    public int getCapacidade() {
         return capacidade;
     }
 
-    public void setCapacidade(Integer capacidade) {
+    public void setCapacidade(int capacidade) {
         this.capacidade = capacidade;
     }
 
@@ -49,5 +61,6 @@ public class AquarioDTO {
         this.animais = animais;
     }
 }
+
 
 
