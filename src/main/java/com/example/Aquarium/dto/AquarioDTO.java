@@ -8,7 +8,7 @@ public class AquarioDTO {
     private String nome;
     private String localizacao;
     private int capacidade;
-    private List<String> animais;; // Certifique-se de que AnimalDTO esteja importado corretamente
+    private List<String> animais; // Certifique-se de que AnimalDTO esteja importado corretamente
 
     public AquarioDTO() {
     }
