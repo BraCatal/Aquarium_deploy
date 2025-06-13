@@ -33,6 +33,14 @@ public class AquarioController {
     public void deletar(@PathVariable Long id) {
         aquarioService.deletar(id);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Aquario> buscarPorId(@PathVariable Long id) {
+    return aquarioRepository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+}
+
 }
 
 
