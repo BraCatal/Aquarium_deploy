@@ -18,6 +18,11 @@ public class AnimalController {
     public List<AnimalDTO> listar() {
         return animalService.listar();
     }
+    
+    @GetMapping("/{id}")
+    public AnimalDTO buscarPorId(@PathVariable Long id) {
+        return animalService.buscarPorId(id);
+    }
 
     @PostMapping
     public AnimalDTO criar(@RequestBody AnimalDTO animalDTO) {
