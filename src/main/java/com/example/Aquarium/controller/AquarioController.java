@@ -14,16 +14,17 @@ public class AquarioController {
     @Autowired
     private AquarioService aquarioService;
 
-    @GetMapping
-    public List<AquarioDTO> listar() {
-        return aquarioService.listar();
-    }
-    
+    @Operation(summary = "Buscar aquário por ID")
     @GetMapping("/{id}")
     public AquarioDTO buscarPorId(@PathVariable Long id) {
     return aquarioService.buscarPorId(id);
     }
 
+    @GetMapping
+    public List<AquarioDTO> listar() {
+        return aquarioService.listar();
+    }
+    
     @PostMapping
     public AquarioDTO criar(@RequestBody AquarioDTO aquarioDTO) {
         return aquarioService.criar(aquarioDTO);
