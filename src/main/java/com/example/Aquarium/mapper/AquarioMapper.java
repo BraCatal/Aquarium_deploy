@@ -35,7 +35,6 @@ public class AquarioMapper {
         aquario.setLocalizacao(dto.getLocalizacao());
         aquario.setCapacidade(dto.getCapacidade());
 
-        // Não setamos a lista de animais aqui por segurança (evita inconsistência)
         return aquario;
     }
 }
