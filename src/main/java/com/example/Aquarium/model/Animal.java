@@ -18,6 +18,6 @@ public class Animal {
     private Integer idade;
 
     @ManyToOne
-    @JoinColumn(name = "aquario_id")  // Cria a FK na tabela Animal
+    @JoinColumn(name = "aquario_id")  
     private Aquario aquario;
 }
