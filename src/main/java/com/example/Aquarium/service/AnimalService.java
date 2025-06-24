@@ -28,6 +28,11 @@ public class AnimalService {
                 .map(AnimalMapper::toDTO)
                 .collect(Collectors.toList());
     }
+    
+    public AnimalDTO buscarPorId(Long id) {
+    Animal animal = animalRepository.findById(id).orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+        return AnimalMapper.toDTO(animal);
+    }
 
     public AnimalDTO criar(AnimalDTO dto) {
         Animal animal = AnimalMapper.toEntity(dto);
