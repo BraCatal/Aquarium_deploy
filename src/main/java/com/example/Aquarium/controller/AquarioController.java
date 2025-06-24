@@ -18,6 +18,11 @@ public class AquarioController {
     public List<AquarioDTO> listar() {
         return aquarioService.listar();
     }
+    
+    @GetMapping("/{id}")
+    public AquarioDTO buscarPorId(@PathVariable Long id) {
+    return aquarioService.buscarPorId(id);
+    }
 
     @PostMapping
     public AquarioDTO criar(@RequestBody AquarioDTO aquarioDTO) {
