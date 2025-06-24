@@ -5,7 +5,7 @@ public class AnimalDTO {
     private String nome;
     private String especie;
     private Integer idade;
-    private Long aquarioId; // Novo campo para o relacionamento
+    private Long aquarioId; 
 
     public Long getId() {
         return id;
