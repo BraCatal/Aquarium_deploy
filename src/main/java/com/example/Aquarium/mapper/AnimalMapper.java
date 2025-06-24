@@ -26,7 +26,6 @@ public class AnimalMapper {
         animal.setEspecie(dto.getEspecie());
         animal.setIdade(dto.getIdade());
 
-        // O campo aquario será setado no Service, se necessário
 
         return animal;
     }
