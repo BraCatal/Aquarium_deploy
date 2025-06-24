@@ -13,15 +13,16 @@ public class AnimalController {
 
     @Autowired
     private AnimalService animalService;
-
-    @GetMapping
-    public List<AnimalDTO> listar() {
-        return animalService.listar();
-    }
     
+    @Operation(summary = "Buscar aquário por ID")
     @GetMapping("/{id}")
     public AnimalDTO buscarPorId(@PathVariable Long id) {
         return animalService.buscarPorId(id);
+    }
+    
+    @GetMapping
+    public List<AnimalDTO> listar() {
+        return animalService.listar();
     }
 
     @PostMapping
