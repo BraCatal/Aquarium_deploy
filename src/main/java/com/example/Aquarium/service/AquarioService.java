@@ -25,6 +25,12 @@ public class AquarioService {
                 .collect(Collectors.toList());
     }
 
+    public AquarioDTO buscarPorId(Long id) {
+    Aquario aquario = aquarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Aquário não encontrado"));
+    return AquarioMapper.toDTO(aquario);
+    }
+
+
     public AquarioDTO criar(AquarioDTO dto) {
         Aquario aquario = AquarioMapper.toEntity(dto);
         Aquario salvo = aquarioRepository.save(aquario);
