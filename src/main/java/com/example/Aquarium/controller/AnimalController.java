@@ -14,7 +14,6 @@ public class AnimalController {
     @Autowired
     private AnimalService animalService;
     
-    @Operation(summary = "Buscar animal por ID")
     @GetMapping("/{id}")
     public AnimalDTO buscarPorId(@PathVariable Long id) {
         return animalService.buscarPorId(id);
