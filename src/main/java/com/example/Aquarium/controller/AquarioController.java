@@ -14,7 +14,6 @@ public class AquarioController {
     @Autowired
     private AquarioService aquarioService;
 
-    @Operation(summary = "Buscar aquário por ID")
     @GetMapping("/{id}")
     public AquarioDTO buscarPorId(@PathVariable Long id) {
     return aquarioService.buscarPorId(id);
