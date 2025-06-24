@@ -7,7 +7,7 @@ public class AquarioDTO {
     private String nome;
     private String localizacao;
     private Integer capacidade;
-    private List<AnimalDTO> animais; // Lista de animais que pertencem a esse aquário
+    private List<AnimalDTO> animais;
 
     public Long getId() {
         return id;
