@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
         license = @License(name = "MIT License")
     ),
     servers = {
-        @Server(url = "http://localhost:8081", description = "Servidor Local")
+        @Server(url = "https://aquarium-rest-api.onrender.com", description = "Servidor Render")
     }
 )
 public class OpenAPIConfig {
