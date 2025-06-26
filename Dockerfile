@@ -1,11 +1,9 @@
-# Use imagem oficial do Java
-FROM openjdk:17-jdk-slim
-
-# Diretório de trabalho no container
+FROM maven:3.9.6-eclipse-temurin-17 as build
 WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Copia o arquivo jar compilado (mude o nome conforme o seu projeto gerado)
-COPY target/*.jar app.jar
-
-# Comando para rodar o jar
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
