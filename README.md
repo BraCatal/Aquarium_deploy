@@ -37,7 +37,3 @@ Para acessar o Swagger diretamente:
 - CRUD completo de Aquários e Animais
 - Relacionamento @OneToMany entre Aquário e Animal
 - Documentação via Swagger disponível publicamente
-
----
-
-Se quiser, posso gerar esses arquivos prontos para colar direto no GitHub. Deseja isso agora?
